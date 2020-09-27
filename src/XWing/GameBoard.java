@@ -1,4 +1,4 @@
-
+package XWing;
 /**
  * Write a description of class GameBoard here.
  *
@@ -34,9 +34,9 @@ public class GameBoard extends JPanel
         f.setSize((int)(91 * 7), (int)(91 * 7));
         f.setVisible(true);    
         l_game.currentBoard = new ArrayList <ShipObject>();
-        ShipObject sample = new ShipObject ("Sample", 12.0, 10.0, 180.0, 0 , 1);
+        ShipObject sample = new ShipObject("Sample", 12.0, 10.0, 180.0, 0 , 1);
         l_game.currentBoard.add(sample);
-        sample = new ShipObject ("X-Wing", 15.5, 5.0, 0.0, 0 , 0);
+        sample = new ShipObject("X-Wing", 15.5, 5.0, 0.0, 0 , 0);
         l_game.currentBoard.add(sample);
         ArrayList<coor> CL = new ArrayList <coor>();
         
@@ -109,11 +109,11 @@ public class GameBoard extends JPanel
                 int l_xc = (int) (ship.getXLoc() * CM);
                 int l_yc = (int) (ship.getYLoc() * CM);
                 int l_ydist = 637;
-                g.fillOval(l_xc, l_ydist -l_yc, 10, 10);
-                g.fillOval(l_x1, l_ydist - l_y1, 10, 10);
-                g.fillOval(l_x2, l_ydist - l_y2, 10, 10);
-                g.fillOval(l_x3, l_ydist - l_y3, 10, 10);
-                g.fillOval(l_x4, l_ydist - l_y4, 10, 10);
+                g.fillOval(l_xc - 5, l_ydist -l_yc + 5, 10, 10);
+                g.fillOval(l_x1 - 5, l_ydist - l_y1 + 5, 10, 10);
+                g.fillOval(l_x2 - 5, l_ydist - l_y2 + 5, 10, 10);
+                g.fillOval(l_x3 - 5, l_ydist - l_y3 + 5, 10, 10);
+                g.fillOval(l_x4 - 5, l_ydist - l_y4 + 5, 10, 10);
             }
         }
                     

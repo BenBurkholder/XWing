@@ -1,3 +1,5 @@
+package XWing;
+
 import java.awt.*;
 import javax.swing.*;
 import java.awt.event.*;
@@ -68,6 +70,7 @@ public class ShipObject
         xLoc = change.getXLoc();
         yLoc = change.getYLoc();
         bearing = change.getBearing();
+        halfBase = change.getBase() / 2;
         corner1X = xLoc + halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
         corner1Y = yLoc + halfBase * Math.sin(d2R(bearing)) + halfBase * Math.cos(d2R(bearing));
         corner2X = xLoc - halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
@@ -86,10 +89,10 @@ public class ShipObject
         double l_bearing = bearing;       
         //don't know why both variables to be set to doubles, but it was doing int math
         double l_fractionMove = (double) numSteps / (double) STEPS;        
-        double l_totalDist = l_fractionMove * ((distance * 4) + base);
+        double l_totalDist = (double) l_fractionMove * (double) ((distance * 4) + base);
         
-        l_testX = l_testX + l_totalDist * (Math.sin(d2R(l_bearing)));
-        l_testY = l_testY + l_totalDist * (Math.cos(d2R(l_bearing)));
+        l_testX = l_testX + (double) l_totalDist * (double) (Math.sin(d2R(l_bearing)));
+        l_testY = l_testY + (double) l_totalDist * (double) (Math.cos(d2R(l_bearing)));
         
         ShipObject testShip = new ShipObject("Test", l_testX, l_testY, l_bearing, base, team);
         return testShip;             
@@ -121,9 +124,9 @@ public class ShipObject
             l_testX = l_testX + l_totalDist * (Math.sin(d2R(l_bearing))) / STEPS;
             l_testY = l_testY + l_totalDist * (Math.cos(d2R(l_bearing))) / STEPS;
             if(LR == 0) {
-                l_bearing = l_bearing - 45.0 / STEPS;
+                l_bearing = l_bearing - (double) 45.0 / (double) STEPS;
             } else if (LR == 1) {
-                l_bearing = l_bearing + 45.0 / STEPS;
+                l_bearing = l_bearing + (double) 45.0 / (double) STEPS;
             }
         }
         
@@ -157,12 +160,12 @@ public class ShipObject
         }
         
         for(int i = 0; i < numSteps; i++) {
-            l_testX = l_testX + l_totalDist * (Math.sin(d2R(l_bearing))) / STEPS;
-            l_testY = l_testY + l_totalDist * (Math.cos(d2R(l_bearing))) / STEPS;
+            l_testX = l_testX + (double) l_totalDist * (double) (Math.sin(d2R(l_bearing))) / STEPS;
+            l_testY = l_testY + (double) l_totalDist * (double) (Math.cos(d2R(l_bearing))) / STEPS;
             if(LR == 0) {
-                l_bearing = l_bearing - 90.0 / STEPS;
+                l_bearing = l_bearing - (double) 90.0 / (double) STEPS;
             } else if (LR == 1) {
-                l_bearing = l_bearing + 90.0 / STEPS;
+                l_bearing = l_bearing + (double) 90.0 / (double) STEPS;
             }
         }
         

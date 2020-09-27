@@ -1,4 +1,4 @@
-
+package XWing;
 /**
  * Write a description of class ShipDatabase here.
  *
@@ -213,33 +213,40 @@ public class ShipDatabase
     
     public void stepMoveShip( int moveType, int distance) 
     {
-        int m_shipIndex;
         ShipObject l_curShip = shipList.get(t);//GetCurrentShip();
         for (int i = 0; i < STEPS; ++i)
         {
             // Start at the last / final position, and work backwards
             int l_curStep =(int) STEPS - i;
-            ShipObject perposedMove;
+            ShipObject proposedMove;
             if(moveType == 0) {
-                perposedMove = l_curShip.straight(distance, l_curStep);
+                proposedMove = l_curShip.straight(distance, l_curStep);
             } else if(moveType == 1) {
-                perposedMove = l_curShip.bank(distance, 0, l_curStep);
+                proposedMove = l_curShip.bank(distance, 0, l_curStep);
             } else if(moveType == 2) {
-                perposedMove = l_curShip.bank(distance, 1, l_curStep);
+                proposedMove = l_curShip.bank(distance, 1, l_curStep);
             } else if(moveType == 3) {
-                perposedMove = l_curShip.turn(distance, 0, l_curStep);
+                proposedMove = l_curShip.turn(distance, 0, l_curStep);
             } else if(moveType == 4) {
-                perposedMove = l_curShip.turn(distance, 1, l_curStep);
+                proposedMove = l_curShip.turn(distance, 1, l_curStep);
             } else{
-                perposedMove = l_curShip;
+                proposedMove = l_curShip.straight(1,0);
             }
             
-            // if(proxCheck(perposedMove) == true) {
-                // shipList.get(t).updateShipLocation(perposedMove);
+            // if(proxCheck(proposedMove) == true) {
+                // shipList.get(t).updateShipLocation(proposedMove);
                 // break;
             // } else 
-            if (collisionCheck(perposedMove) == true) {
-                shipList.get(t).updateShipLocation(perposedMove);
+            
+            // remove first if
+            if (collisionCheck(proposedMove) == false) {
+                System.out.println("collision");
+                // shipList.get(t).updateShipLocation(proposedMove);
+                // break;
+            }
+            if (collisionCheck(proposedMove) == true) {
+                shipList.get(t).updateShipLocation(proposedMove);
+                System.out.println(l_curStep);
                 break;
             }            
         }        
@@ -295,13 +302,13 @@ public class ShipDatabase
         
         //rotate around (0,0) for new corners with bearing 0
         l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-        l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-        l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-        l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
+        l_x2 = l_x2 * Math.cos(d2R(l_b)) - l_y2 * Math.sin(d2R(l_b));
+        l_x3 = l_x3 * Math.cos(d2R(l_b)) - l_y3 * Math.sin(d2R(l_b));
+        l_x4 = l_x4 * Math.cos(d2R(l_b)) - l_y4 * Math.sin(d2R(l_b));
         l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-        l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-        l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-        l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
+        l_y2 = l_y2 * Math.cos(d2R(l_b)) + l_x2 * Math.sin(d2R(l_b));
+        l_y3 = l_y3 * Math.cos(d2R(l_b)) + l_x3 * Math.sin(d2R(l_b));
+        l_y4 = l_y4 * Math.cos(d2R(l_b)) + l_x4 * Math.sin(d2R(l_b));
         
         //get collision area
         double upperX = l_x1;
@@ -345,6 +352,8 @@ public class ShipDatabase
         if (l_y4 < lowerY) {
             lowerY = l_y4;
         }
+        System.out.println(lowerX + " " + upperX + " " +  lowerY + " " +  upperY);
+        
         //transform all ships corners the same amount as attempted moves bearing, check for corners
         //within transformed attempted move.
         for(int i = 0; i < shipList.size(); i++) {
@@ -361,24 +370,24 @@ public class ShipDatabase
                 //l_b = l_ship.getBearing();
                 
                 l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
+                l_x2 = l_x2 * Math.cos(d2R(l_b)) - l_y2 * Math.sin(d2R(l_b));
+                l_x3 = l_x3 * Math.cos(d2R(l_b)) - l_y3 * Math.sin(d2R(l_b));
+                l_x4 = l_x4 * Math.cos(d2R(l_b)) - l_y4 * Math.sin(d2R(l_b));
                 l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
+                l_y2 = l_y2 * Math.cos(d2R(l_b)) + l_x2 * Math.sin(d2R(l_b));
+                l_y3 = l_y3 * Math.cos(d2R(l_b)) + l_x3 * Math.sin(d2R(l_b));
+                l_y4 = l_y4 * Math.cos(d2R(l_b)) + l_x4 * Math.sin(d2R(l_b));
                 
-                if(l_x1 > lowerX && l_x1 < upperX && l_y1 > lowerY && l_y1 < upperY) {
+                if(l_x1 >= lowerX && l_x1 <= upperX && l_y1 >= lowerY && l_y1 <= upperY) {
+                    return false;                    
+                }
+                if(l_x2 >= lowerX && l_x2 <= upperX && l_y2 >= lowerY && l_y2 <= upperY) {
                     return false;
                 }
-                if(l_x2 > lowerX && l_x2 < upperX && l_y2 > lowerY && l_y2 < upperY) {
+                if(l_x3 >= lowerX && l_x3 <= upperX && l_y3 >= lowerY && l_y3 <= upperY) {
                     return false;
                 }
-                if(l_x3 > lowerX && l_x3 < upperX && l_y3 > lowerY && l_y3 < upperY) {
-                    return false;
-                }
-                if(l_x4 > lowerX && l_x4 < upperX && l_y4 > lowerY && l_y4 < upperY) {
+                if(l_x4 >= lowerX && l_x4 <= upperX && l_y4 >= lowerY && l_y4 <= upperY) {
                     return false;
                 }
             }
@@ -399,13 +408,13 @@ public class ShipDatabase
                 l_b = l_newTestShip.getBearing();
                 
                 l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
+                l_x2 = l_x2 * Math.cos(d2R(l_b)) - l_y2 * Math.sin(d2R(l_b));
+                l_x3 = l_x3 * Math.cos(d2R(l_b)) - l_y3 * Math.sin(d2R(l_b));
+                l_x4 = l_x4 * Math.cos(d2R(l_b)) - l_y4 * Math.sin(d2R(l_b));
                 l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
+                l_y2 = l_y2 * Math.cos(d2R(l_b)) + l_x2 * Math.sin(d2R(l_b));
+                l_y3 = l_y3 * Math.cos(d2R(l_b)) + l_x3 * Math.sin(d2R(l_b));
+                l_y4 = l_y4 * Math.cos(d2R(l_b)) + l_x4 * Math.sin(d2R(l_b));
                 
                 
                 
@@ -463,24 +472,24 @@ public class ShipDatabase
                 //l_b = l_ship.getBearing();
                 
                 l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
-                l_x1 = l_x1 * Math.cos(d2R(l_b)) - l_y1 * Math.sin(d2R(l_b));
+                l_x2 = l_x2 * Math.cos(d2R(l_b)) - l_y2 * Math.sin(d2R(l_b));
+                l_x3 = l_x3 * Math.cos(d2R(l_b)) - l_y3 * Math.sin(d2R(l_b));
+                l_x4 = l_x4 * Math.cos(d2R(l_b)) - l_y4 * Math.sin(d2R(l_b));
                 l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
-                l_y1 = l_y1 * Math.cos(d2R(l_b)) + l_x1 * Math.sin(d2R(l_b));
+                l_y2 = l_y2 * Math.cos(d2R(l_b)) + l_x2 * Math.sin(d2R(l_b));
+                l_y3 = l_y3 * Math.cos(d2R(l_b)) + l_x3 * Math.sin(d2R(l_b));
+                l_y4 = l_y4 * Math.cos(d2R(l_b)) + l_x4 * Math.sin(d2R(l_b));
                 
-                if(l_x1 > lowerX && l_x1 < upperX && l_y1 > lowerY && l_y1 < upperY) {
+                if(l_x1 >= lowerX && l_x1 <= upperX && l_y1 >= lowerY && l_y1 <= upperY) {
                     return false;
                 }
-                if(l_x2 > lowerX && l_x2 < upperX && l_y2 > lowerY && l_y2 < upperY) {
+                if(l_x2 >= lowerX && l_x2 <= upperX && l_y2 >= lowerY && l_y2 <= upperY) {
                     return false;
                 }
-                if(l_x3 > lowerX && l_x3 < upperX && l_y3 > lowerY && l_y3 < upperY) {
+                if(l_x3 >= lowerX && l_x3 <= upperX && l_y3 >= lowerY && l_y3 <= upperY) {
                     return false;
                 }
-                if(l_x4 > lowerX && l_x4 < upperX && l_y4 > lowerY && l_y4 < upperY) {
+                if(l_x4 >= lowerX && l_x4 <= upperX && l_y4 >= lowerY && l_y4 <= upperY) {
                     return false;
                 }
                 

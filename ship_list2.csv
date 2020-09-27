@@ -1,2 +1,4 @@
 ﻿Ship Name,X-Location,Y-Location,Bearing,Size,team
-Tie Fighter,5,5,0,4,0
+Tie Fighter,35,25,0,4,0
+xwing,42,34,180,4,1
+bw,25,25,45,4,1

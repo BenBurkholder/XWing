@@ -1,3 +1,4 @@
+package XWing;
 
 import java.awt.*;
 import javax.swing.*;
@@ -361,7 +362,7 @@ public class XWingGUI extends JFrame implements ActionListener
         
     
     public void actionPerformed(ActionEvent event){
-        System.out.println("this works a little");
+        
         if (event.getSource() == exit) {
             System.exit(0);
         }
