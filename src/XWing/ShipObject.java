@@ -39,13 +39,13 @@ public class ShipObject
         base = s;
         team = t;
         halfBase = base / 2.0;
-        corner1X = xLoc + halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
+        corner1X = xLoc - halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
         corner1Y = yLoc + halfBase * Math.sin(d2R(bearing)) + halfBase * Math.cos(d2R(bearing));
-        corner2X = xLoc - halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
+        corner2X = xLoc + halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
         corner2Y = yLoc - halfBase * Math.sin(d2R(bearing)) + halfBase * Math.cos(d2R(bearing));
-        corner3X = xLoc - halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
+        corner3X = xLoc + halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
         corner3Y = yLoc - halfBase * Math.sin(d2R(bearing)) - halfBase * Math.cos(d2R(bearing));
-        corner4X = xLoc + halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
+        corner4X = xLoc - halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
         corner4Y = yLoc + halfBase * Math.sin(d2R(bearing)) - halfBase * Math.cos(d2R(bearing));
         
     }
@@ -71,13 +71,13 @@ public class ShipObject
         yLoc = change.getYLoc();
         bearing = change.getBearing();
         halfBase = change.getBase() / 2;
-        corner1X = xLoc + halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
+        corner1X = xLoc - halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
         corner1Y = yLoc + halfBase * Math.sin(d2R(bearing)) + halfBase * Math.cos(d2R(bearing));
-        corner2X = xLoc - halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
+        corner2X = xLoc + halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
         corner2Y = yLoc - halfBase * Math.sin(d2R(bearing)) + halfBase * Math.cos(d2R(bearing));
-        corner3X = xLoc - halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
+        corner3X = xLoc + halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
         corner3Y = yLoc - halfBase * Math.sin(d2R(bearing)) - halfBase * Math.cos(d2R(bearing));
-        corner4X = xLoc + halfBase * Math.cos(d2R(bearing)) + halfBase * Math.sin(d2R(bearing));
+        corner4X = xLoc - halfBase * Math.cos(d2R(bearing)) - halfBase * Math.sin(d2R(bearing));
         corner4Y = yLoc + halfBase * Math.sin(d2R(bearing)) - halfBase * Math.cos(d2R(bearing));
     }
         

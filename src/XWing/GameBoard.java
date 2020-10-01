@@ -47,7 +47,7 @@ public class GameBoard extends JPanel
     /**
      * An example of a method - replace this comment with your own
      *
-     * @param  y  a sample parameter for a method
+     *
      * @return    the sum of x and y
      */
     public void paintComponent(Graphics g)    
@@ -109,11 +109,19 @@ public class GameBoard extends JPanel
                 int l_xc = (int) (ship.getXLoc() * CM);
                 int l_yc = (int) (ship.getYLoc() * CM);
                 int l_ydist = 637;
-                g.fillOval(l_xc - 5, l_ydist -l_yc + 5, 10, 10);
-                g.fillOval(l_x1 - 5, l_ydist - l_y1 + 5, 10, 10);
-                g.fillOval(l_x2 - 5, l_ydist - l_y2 + 5, 10, 10);
-                g.fillOval(l_x3 - 5, l_ydist - l_y3 + 5, 10, 10);
-                g.fillOval(l_x4 - 5, l_ydist - l_y4 + 5, 10, 10);
+//                g.fillOval(l_xc - 5, l_ydist -l_yc + 5, 10, 10);
+//                g.fillOval(l_x1 - 5, l_ydist - l_y1 + 5, 10, 10);
+//                g.fillOval(l_x2 - 5, l_ydist - l_y2 + 5, 10, 10);
+//                g.fillOval(l_x3 - 5, l_ydist - l_y3 + 5, 10, 10);
+//                g.fillOval(l_x4 - 5, l_ydist - l_y4 + 5, 10, 10);
+                g.drawLine(l_x1, l_ydist - l_y1, l_x2, l_ydist - l_y2);
+                g.drawLine(l_x2, l_ydist - l_y2, l_x3, l_ydist - l_y3);
+                g.drawLine(l_x3, l_ydist - l_y3, l_x4, l_ydist - l_y4);
+                g.drawLine(l_x4, l_ydist - l_y4, l_x1, l_ydist - l_y1);
+                g.drawLine(l_x1, l_ydist - l_y1, l_xc, l_ydist - l_yc);
+                g.drawLine(l_x2, l_ydist - l_y2, l_xc, l_ydist - l_yc);
+
+
             }
         }
                     
